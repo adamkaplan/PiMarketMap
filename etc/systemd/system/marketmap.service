@@ -1,0 +1,16 @@
+[Unit]
+Description=Run Pi Stock Market Heatmap
+Wants=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=chdir /home/pi/PiMarketMap
+ExecStart=/usr/bin/python /home/pi/PiMarketMap/pimarketmap.py
+StandardOutput=syslog
+StandardError=syslog
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

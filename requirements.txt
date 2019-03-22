@@ -1,0 +1,5 @@
+asyncio~=3.4.3
+requests~=2.21.0
+unicornhat~=2.2.3
+websockets~=7.0
+protobuf~=3.7.0

@@ -1,0 +1,7 @@
+asyncio~=3.4.3
+requests~=2.21.0
+websockets~=7.0
+protobuf~=3.7.0
+
+#unicorn-hat-sim~=1.0.0
+git+git://github.com/adamkaplan/unicorn-hat-sim@patch-1#egg=unicorn-hat-sim
