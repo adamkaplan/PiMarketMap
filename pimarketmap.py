@@ -85,9 +85,9 @@ class ComponentList(collections.MutableSequence):
         MARKET_CAP = 'market_cap'
         CHANGE_PERCENT = 'change_percent'
 
-    def sort(self, sortKey: SortKey):
-        self.sortKey = sortKey
-        self.list.sort(key=lambda x: x.quote[sortKey.value], reverse=True)
+    def sort(self, sort_key: SortKey):
+        self.sort_key = sort_key
+        self.list.sort(key=lambda x: x.quote[sort_key.value], reverse=True)
         for idx,component in enumerate(self.list):
             component.index = idx
 
@@ -96,12 +96,12 @@ class ComponentList(collections.MutableSequence):
             raise TypeError('Must be a Component type')
 
     def find(self, symbol: str) -> Component:
-        return self.lookupTable[symbol]
+        return self.lookup_table[symbol]
 
     def __init__(self, *args):
         self.list = list()
-        self.lookupTable = dict()
-        self.sortKey = None
+        self.lookup_table = dict()
+        self.sort_key = None
         self.extend(list(args))
 
     def __len__(self): return len(self.list)
@@ -110,20 +110,20 @@ class ComponentList(collections.MutableSequence):
 
     def __delitem__(self, i):
         if i in self.list:
-            del self.lookupTable[self.list[i].symbol]
+            del self.lookup_table[self.list[i].symbol]
         del self.list[i]
 
     def __setitem__(self, i, v):
         self.check(v)
         v.index = i
         self.list[i] = v
-        self.lookupTable[v.symbol] = v
+        self.lookup_table[v.symbol] = v
 
     def insert(self, i, v):
         self.check(v)
         v.index = i
         self.list.insert(i, v)
-        self.lookupTable[v.symbol] = v
+        self.lookup_table[v.symbol] = v
 
     def __str__(self):
         return str(self.list)
@@ -203,9 +203,10 @@ class Streamer:
             if len(update_symbols) == 0:
                 continue
 
-            # Render the update flashes
-            to_update = map(lambda s: self.components.find(s), update_symbols)
-            self.renderer.flash(to_update)
+            if self.components.sort_key == ComponentList.SortKey.MARKET_CAP:
+                # Render the update flash
+                to_update = map(lambda s: self.components.find(s), update_symbols)
+                self.renderer.flash(to_update)
 
             now = time.time()
 
@@ -258,7 +259,7 @@ async def rotateLayout(renderer: Renderer, components: ComponentList):
     sort_keys = list(ComponentList.SortKey)
     while True:
         await asyncio.sleep(8.0)
-        idx = sort_keys.index(components.sortKey)
+        idx = sort_keys.index(components.sort_key)
         next_idx = (idx + 1) % len(sort_keys)
         next_sort = sort_keys[next_idx]
         components.sort(next_sort)
@@ -298,7 +299,7 @@ def main():
     streamer = Streamer(renderer, components)
 
     asyncio.get_event_loop().run_until_complete(asyncio.gather(
-        rotateLayout(renderer, components),
+        #rotateLayout(renderer, components),
         streamer.connect()
     ))
 
