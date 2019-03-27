@@ -27,7 +27,15 @@ The day change of [all 30 DJI stocks](https://finance.yahoo.com/quote/%5EDJI/com
 
 When an update comes in, the red/green/blue lights flash to a brighter saturation for a brief period before returning to the base color.
 
+### Light Grid Layout
+
 The Dow 30 stocks are sorted by market cap such that the most valuable company occupies the first light, and the lowest value company occupies the last spot. The "first light" is the top-left light if you are holding the Pi such that the word "Unicorn" is on the left side. The lights progress down, and to the left. The 4th largest Dow component is the bottom light of the first/left column, and the 5th largest Dow component is the first light at the top of the second column from the left.
+
+### Shutting Down The Pi
+
+In order to prevent SD card corruption, you should always try to shut the Pi down gracefully. While you can do this via SSH or the GUI, there is a quicker way!
+
+Simply short the left most two header pins (the two closest to the word Unicorn) using a paperclip or the metal end of a USB cable. This will trigger shut down of the pi down within 2 seconds!
 
 ## Instructions for Raspbian Linux
 
