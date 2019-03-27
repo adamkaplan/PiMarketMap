@@ -23,7 +23,11 @@ Realtime stock market heat map using Raspberry Pi &amp; Unicorn pHAT
 
 PiMarketMap provides realtime visualization of U.S. market conditions, using a Unicorn pHAT and Raspberry Pi (A/B or Zero). It utilizes Yahoo Finance APIs to get the list of 30 stocks in the Dow Jones Industrial Average. It also fetches the current market values for those stocks, a subscribes to realtime streaming price updates.
 
-The day change state of all 30 DJI stocks are displayed using 32 RGB LED lights on the Unicorn pHAT. Stocks which are up for the current trading period, are green, stocks that are down are red, and stocks that have not changed are blue. When an update comes in, the red/green/blue lights flash to a  brighter saturation for a brief period before returning to the base color.
+The day change of [all 30 DJI stocks](https://finance.yahoo.com/quote/%5EDJI/components?p=%5EDJI) is displayed using 30 RGB LED lights on the Unicorn pHAT. The last two lights depict the Pound vs the US Dollar, and the Yen vs the US Dollar. Stocks which are up for the current trading day, are green. Stocks that are down are red. Stocks that have not changed value are blue.
+
+When an update comes in, the red/green/blue lights flash to a brighter saturation for a brief period before returning to the base color.
+
+The Dow 30 stocks are sorted by market cap such that the most valuable company occupies the first light, and the lowest value company occupies the last spot. The "first light" is the top-left light if you are holding the Pi such that the word "Unicorn" is on the left side. The lights progress down, and to the left. The 4th largest Dow component is the bottom light of the first/left column, and the 5th largest Dow component is the first light at the top of the second column from the left.
 
 ## Instructions for Raspbian Linux
 
