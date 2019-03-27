@@ -8,13 +8,13 @@ Realtime stock market heat map using Raspberry Pi &amp; Unicorn pHAT
 
 - [Background](#background)
 - [Instructions for Raspbian Linux](#instructions-for-raspbian-linux)
-  - [Requirements](#requirements)
-  - [Installation](#installation)
-  - [Usage](#Usage)
+  - [Requirements](#requirements-raspbian)
+  - [Installation](#installation-raspbian)
+  - [Usage](#usage-raspbian)
 - [Instructions for macOS Mojave](#instructions-for-macos-mojave)
-  - [Requirements](#requirements)
-  - [Installation](#installation)
-  - [Usage](#Usage)
+  - [Requirements](#requirements-macos)
+  - [Installation](#installation-macos)
+  - [Usage](#usage-macos)
 - [Contributing](#contributing)
 - [Maintainers](#maintainers)
 - [License](#license)
@@ -27,7 +27,7 @@ The day change state of all 30 DJI stocks are displayed using 32 RGB LED lights 
 
 ## Instructions for Raspbian Linux
 
-### Requirements
+### Requirements Raspbian
 
 #### Hardware
 - [Raspberry Pi Zero](https://www.raspberrypi.org/products/raspberry-pi-zero-w/) (Pi A and B should work, but not tested)
@@ -40,9 +40,7 @@ The day change state of all 30 DJI stocks are displayed using 32 RGB LED lights 
 #### Software
 - Python3 (3.5 and 3.7 tested)
 
-### Installation
-
-### Raspian Stretch
+### Installation Raspbian
 
 Switch to Python 3
 ```
@@ -58,7 +56,7 @@ cd PiMarketMap
 sudo pip3 install -r requirements.txt
 ```
 
-### Usage
+### Usage Raspbian
 
 Run (root is required for GPIO access)
 ```
@@ -86,11 +84,11 @@ Side note: if you need to make the Pi join wifi networks on boot, [read this](ht
 
 ## Instructions for MacOS Mojave
 
-### Requirements
+### Requirements macOS
 
 - Python [3.7.0](https://github.com/pygame/pygame/issues/555#issuecomment-471258085) [Download install package](https://www.python.org/ftp/python/3.7.0/python-3.7.0-macosx10.9.pkg). macOS Mojave ship with 3.7.2, which does not work.
 
-### Installation
+### Installation macOS
 
 Clone this project and install *dev* dependencies.
 ```
@@ -98,7 +96,7 @@ git clone git@github.com:adamkaplan/PiMarketMap.git
 cd PiMarketMap
 pip3 install -r dev_requirements.txt
 ```
-### Usage
+### Usage macOS
 
 Run in the pHAT simulator, and enjoy!
 ```
