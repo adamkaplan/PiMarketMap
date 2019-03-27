@@ -7,6 +7,9 @@ Realtime stock market heat map using Raspberry Pi &amp; Unicorn pHAT
 ## Table of Contents
 
 - [Background](#background)
+  - [Shutting Down The Pi](#shutting-down-the-pi)
+  - [LED Light Legend](#led-light-legend)
+  - [WiFi Setup](#wifi-setup)
 - [Instructions for Raspbian Linux](#instructions-for-raspbian-linux)
   - [Requirements](#requirements-raspbian)
   - [Installation](#installation-raspbian)
@@ -27,15 +30,62 @@ The day change of [all 30 DJI stocks](https://finance.yahoo.com/quote/%5EDJI/com
 
 When an update comes in, the red/green/blue lights flash to a brighter saturation for a brief period before returning to the base color.
 
-### Light Grid Layout
+### LED Light Legend
 
 The Dow 30 stocks are sorted by market cap such that the most valuable company occupies the first light, and the lowest value company occupies the last spot. The "first light" is the top-left light if you are holding the Pi such that the word "Unicorn" is on the left side. The lights progress down, and to the left. The 4th largest Dow component is the bottom light of the first/left column, and the 5th largest Dow component is the first light at the top of the second column from the left.
 
+As of March 2019, this is the LED to Stock mapping:
+```
+ ___________________________________________
+|  MSFT XOM  PG   PFE  HD   MCD  MMM  GS    |
+|  AAPL V    VZ   CSCO BA   NKE  UTX  BTC*  |
+|  FB*  JPM  INTC UNH  KO   IBM  AXP  WBA   |
+|  JNJ  WMT  CVX  MRK  DIS  DWDP CAT  TRV   |
+|-------------------------------------------|
+|o : : : : : : : : : : : : : : : : : : : : o|
+'-------------------------------------------'
+```
+
 ### Shutting Down The Pi
+ 
+It's very easy to properly shut down your PiMarketMap, so do it properly! Simply short the two left most jumpers using a paper clip or the end of a USB cable. It will shut off within 2 seconds.
+```
+ ___________________________________________
+|  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]   |
+|  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]   |
+|  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]   |
+|  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]   |
+|-------------------------------------------|
+|o : : : : : : : : : : : : : : : : : : : : o|
+'-------------------------------------------'
+   /\
+ Touch these two together with a paperclip!
+```
 
-In order to prevent SD card corruption, you should always try to shut the Pi down gracefully. While you can do this via SSH or the GUI, there is a quicker way!
+### WiFi Setup
 
-Simply short the left most two header pins (the two closest to the word Unicorn) using a paperclip or the metal end of a USB cable. This will trigger shut down of the pi down within 2 seconds!
+If you want to set a custom WiFi, shut down the PiMarketMap. Remove the SD card, and insert it into a computer. On the "boot" volume (which on macOS will automatically appear at `/Volumes/boot`), add a new file named `wpa_supplicant.conf` following the [format here](https://www.raspberrypi.org/forums/viewtopic.php?t=203716#p1264992). Or, copy paste this into the Terminal:
+
+```
+echo 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=US
+
+network={
+  ssid="YOUR_NETWORK_NAME"
+	psk="YOUR_PASSWORD"
+	id_str="MY_WIFI_LABEL"
+	priority=100
+	key_mgmt=WPA-PSK
+}
+
+network={
+  ssid="YOUR_NETWORK_NAME"
+	id_str="MY_WIFI_LABEL_NO_PASSWORD"
+	priority=50
+	key_mgmt=NONE
+}' > /Volumes/boot/wpa_supplicant.conf
+```
 
 ## Instructions for Raspbian Linux
 
