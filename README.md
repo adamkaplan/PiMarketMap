@@ -2,7 +2,7 @@
 
 Realtime stock market heat map using Raspberry Pi &amp; Unicorn pHAT
 
-![Market Heat Map](https://github.com/storage/user/12445/files/6eee7b00-4cc2-11e9-888b-120b57a6fcbf)
+![Market Heat Map](https://github.com/adamkaplan/PiMarketMap/blob/images/6eee7b00-4cc2-11e9-888b-120b57a6fcbf.gif)
 
 ## Table of Contents
 
