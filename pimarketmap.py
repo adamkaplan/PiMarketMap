@@ -286,11 +286,14 @@ def main():
 
     components = ComponentList()
     for quote in dow_30:
-        print("%s: %f" % (quote['symbol'], quote['regularMarketChangePercent']))
+        change = quote['regularMarketChangePercent'] if 'regularMarketChangePercent' in quote else 0
+        mktCap = quote['marketCap'] if 'marketCap' in quote else 0
+
+        print("%s: %f %d" % (quote['symbol'], change, mktCap))
         comp = Component(quote['symbol'])
         comp.quote = {
-            'change_percent': quote['regularMarketChangePercent'],
-            'market_cap': quote['marketCap']
+            'change_percent': change,
+            'market_cap': mktCap
         }
         components.append(comp)
 
